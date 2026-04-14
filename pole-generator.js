@@ -24,37 +24,39 @@ export function createConstructionPole() {
         metalness: 0.0 
     });
 
+    // Add a sharp metal tip at the bottom
+    const tipHeight = 0.15; // 15cm sharp tip
+    const tipGeo = new THREE.ConeGeometry(radius, tipHeight, 16);
+    const tipMat = new THREE.MeshStandardMaterial({ 
+        color: 0x555555, 
+        metalness: 0.8, 
+        roughness: 0.2 
+    });
+    const tip = new THREE.Mesh(tipGeo, tipMat);
+    // Point the cone downwards
+    tip.rotation.x = Math.PI;
+    tip.position.y = tipHeight / 2;
+    poleGroup.add(tip);
+
     for (let i = 0; i < segments; i++) {
         const geometry = new THREE.CylinderGeometry(radius, radius, segmentHeight, 16);
         const material = (i % 2 === 0) ? redMaterial : whiteMaterial;
         const mesh = new THREE.Mesh(geometry, material);
         
-        // Position each segment vertically
-        // CylinderGeometry centered at Y, so we shift it
-        mesh.position.y = (i * segmentHeight) + (segmentHeight / 2);
+        // Position each segment above the tip
+        mesh.position.y = tipHeight + (i * segmentHeight) + (segmentHeight / 2);
         
-        // Cast shadow for realism in AR
         mesh.castShadow = true;
         mesh.receiveShadow = true;
-        
         poleGroup.add(mesh);
     }
 
     // Optional: Add a small black cap at the top
-    const capGeo = new THREE.CylinderGeometry(radius + 0.002, radius + 0.002, 0.02, 16);
+    const capGeo = new THREE.CylinderGeometry(radius, radius, 0.02, 16);
     const capMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
     const cap = new THREE.Mesh(capGeo, capMat);
-    cap.position.y = totalHeight;
+    cap.position.y = tipHeight + totalHeight;
     poleGroup.add(cap);
-
-    // Optional: Add a base plate for stability feel
-    const baseGeo = new THREE.CylinderGeometry(radius * 3, radius * 3, 0.01, 24);
-    const base = new THREE.Mesh(baseGeo, capMat);
-    base.position.y = 0.005;
-    poleGroup.add(base);
-
-    // Scale down a bit if it feels too tall in AR (optional)
-    // poleGroup.scale.set(1, 1, 1);
 
     return poleGroup;
 }
