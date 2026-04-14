@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAR Construction Pole - 工事用ポール配置</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Outfit for a premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Import Map for Three.js -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="ui-overlay">
+        <header>
+            <h1>AR Pole Placement</h1>
+            <p>タップでポールを配置</p>
+        </header>
+
+        <div id="instructions" class="glass">
+            <p id="instruction-text">床をスキャンしてください...</p>
+        </div>
+
+        <div id="controls">
+            <button id="reset-btn" class="glass-btn" title="すべて消去">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>リセット</span>
+            </button>
+            
+            <button id="capture-btn" class="glass-btn primary" title="撮影">
+                <div class="shutter-icon"></div>
+                <span>撮影</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- AR Start Button (managed by Three.js ARButton, but we can customize or use our own) -->
+    <div id="ar-start-container">
+        <button id="start-ar-btn">ARを開始する</button>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
