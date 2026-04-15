@@ -22,7 +22,7 @@ const screenshotInstruction = document.getElementById('screenshot-instruction');
 const versionBadge = document.getElementById('version-badge');
 const instructionText = document.getElementById('instruction-text');
 
-versionBadge.innerText = 'Ver 2.0';
+versionBadge.innerText = 'Ver 2.2';
 
 try {
     init();
@@ -61,9 +61,11 @@ function init() {
         domOverlay: { root: uiOverlay }
     });
     
-    // Some browsers require the button to be in the DOM to trigger click events
+    // Completely hide the default Three.js button
     arButton.style.display = 'none';
-    container.appendChild(arButton);
+    arButton.style.visibility = 'hidden';
+    arButton.style.opacity = '0';
+    document.body.appendChild(arButton);
     
     // Replace standard button with our custom styled one
     startBtn.addEventListener('click', () => {
@@ -137,28 +139,23 @@ function init() {
     });
 
     window.addEventListener('resize', onWindowResize);
-
-    // Reliable toggle for clean view
-    window.addEventListener('click', () => {
-        if (isCleanView) {
-            const isHidden = screenshotInstruction.classList.contains('hidden');
-            if (isHidden) {
-                screenshotInstruction.classList.remove('hidden');
-            } else {
-                screenshotInstruction.classList.add('hidden');
-            }
-        }
-    });
 }
 
 function toggleUI(visible) {
+    const topUI = document.getElementById('top-ui');
+    const controls = document.getElementById('controls');
+    
     if (visible) {
         isCleanView = false;
-        uiOverlay.classList.add('active');
+        topUI.style.display = 'flex';
+        controls.style.display = 'flex';
+        versionBadge.style.display = 'block';
         screenshotInstruction.classList.add('hidden');
     } else {
         isCleanView = true;
-        uiOverlay.classList.remove('active');
+        topUI.style.display = 'none';
+        controls.style.display = 'none';
+        versionBadge.style.display = 'none';
         // Start with screenshot instruction hidden for a truly clean view
         screenshotInstruction.classList.add('hidden');
     }
