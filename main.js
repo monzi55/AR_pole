@@ -9,6 +9,7 @@ let hitTestSource = null;
 let hitTestSourceRequested = false;
 
 let poles = [];
+let screenshotRequested = false;
 const uiOverlay = document.getElementById('ui-overlay');
 const startBtnContainer = document.getElementById('ar-start-container');
 const startBtn = document.getElementById('start-ar-btn');
@@ -172,14 +173,14 @@ function render(timestamp, frame) {
     }
 
     renderer.render(scene, camera);
+
+    if (screenshotRequested) {
+        captureFrame();
+        screenshotRequested = false;
+    }
 }
 
-function takeScreenshot() {
-    // Note: This captures the WebGL canvas. 
-    // In many WebXR environments, the camera feed is handled by the browser 
-    // and is not directly readable in the main GL context.
-    // However, this will capture all placed 3D poles.
-    
+function captureFrame() {
     try {
         const dataURL = renderer.domElement.toDataURL('image/png');
         const link = document.createElement('a');
@@ -195,4 +196,8 @@ function takeScreenshot() {
         console.error('Screenshot failed:', err);
         alert('撮影に失敗しました');
     }
+}
+
+function takeScreenshot() {
+    screenshotRequested = true;
 }
