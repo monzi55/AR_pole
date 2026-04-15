@@ -10,6 +10,7 @@ let hitTestSourceRequested = false;
 
 let poles = [];
 let screenshotRequested = false;
+let isCleanView = false;
 const uiOverlay = document.getElementById('ui-overlay');
 const startBtnContainer = document.getElementById('ar-start-container');
 const startBtn = document.getElementById('start-ar-btn');
@@ -21,7 +22,7 @@ const screenshotInstruction = document.getElementById('screenshot-instruction');
 const versionBadge = document.getElementById('version-badge');
 const instructionText = document.getElementById('instruction-text');
 
-versionBadge.innerText = 'Ver 1.8';
+versionBadge.innerText = 'Ver 1.9';
 
 try {
     init();
@@ -140,15 +141,29 @@ function init() {
 
 function toggleUI(visible) {
     if (visible) {
+        isCleanView = false;
         uiOverlay.classList.add('active');
         screenshotInstruction.classList.add('hidden');
     } else {
+        isCleanView = true;
         uiOverlay.classList.remove('active');
-        screenshotInstruction.classList.remove('hidden');
+        // Start with screenshot instruction hidden for a truly clean view
+        screenshotInstruction.classList.add('hidden');
     }
 }
 
 function onSelect() {
+    if (isCleanView) {
+        // Toggle the restore button visibility when tapping in clean view
+        const isHidden = screenshotInstruction.classList.contains('hidden');
+        if (isHidden) {
+            screenshotInstruction.classList.remove('hidden');
+        } else {
+            screenshotInstruction.classList.add('hidden');
+        }
+        return;
+    }
+
     if (reticle.visible) {
         const pole = createConstructionPole();
         reticle.matrix.decompose(pole.position, pole.quaternion, pole.scale);
