@@ -22,7 +22,7 @@ const screenshotInstruction = document.getElementById('screenshot-instruction');
 const versionBadge = document.getElementById('version-badge');
 const instructionText = document.getElementById('instruction-text');
 
-versionBadge.innerText = 'Ver 2.3';
+versionBadge.innerText = 'Ver 2.4';
 
 try {
     init();
