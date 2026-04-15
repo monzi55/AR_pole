@@ -66,8 +66,8 @@ export function createConstructionPole() {
  */
 export function createReticle() {
     const reticle = new THREE.Mesh(
-        new THREE.RingGeometry(0.1, 0.11, 32).rotateX(-Math.PI / 2),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true })
+        new THREE.CircleGeometry(0.01, 32).rotateX(-Math.PI / 2),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.8, transparent: true })
     );
     reticle.matrixAutoUpdate = false;
     reticle.visible = false;
