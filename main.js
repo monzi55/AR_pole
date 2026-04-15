@@ -22,7 +22,7 @@ const screenshotInstruction = document.getElementById('screenshot-instruction');
 const versionBadge = document.getElementById('version-badge');
 const instructionText = document.getElementById('instruction-text');
 
-versionBadge.innerText = 'Ver 2.2';
+versionBadge.innerText = 'Ver 2.3';
 
 try {
     init();
@@ -149,13 +149,11 @@ function toggleUI(visible) {
         isCleanView = false;
         topUI.style.display = 'flex';
         controls.style.display = 'flex';
-        versionBadge.style.display = 'block';
         screenshotInstruction.classList.add('hidden');
     } else {
         isCleanView = true;
         topUI.style.display = 'none';
         controls.style.display = 'none';
-        versionBadge.style.display = 'none';
         // Start with screenshot instruction hidden for a truly clean view
         screenshotInstruction.classList.add('hidden');
     }
