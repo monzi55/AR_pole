@@ -20,13 +20,15 @@
 </head>
 <body>
     <div id="ui-overlay">
-        <header>
-            <h1>AR Pole Placement</h1>
-            <p>タップでポールを配置</p>
-        </header>
+        <div id="top-ui">
+            <header>
+                <h1>AR Pole Placement</h1>
+                <p>タップでポールを配置</p>
+            </header>
 
-        <div id="instructions" class="glass">
-            <p id="instruction-text">床をスキャンしてください...</p>
+            <div id="instructions" class="glass">
+                <p id="instruction-text">床をスキャンしてください...</p>
+            </div>
         </div>
 
         <div id="controls">
@@ -40,12 +42,12 @@
                 <span>撮影</span>
             </button>
         </div>
-        <div id="version-badge">Ver 1.2</div>
     </div>
 
     <!-- AR Start Button (managed by Three.js ARButton, but we can customize or use our own) -->
     <div id="ar-start-container">
         <button id="start-ar-btn">ARを開始する</button>
+        <div id="version-badge">Ver 1.3</div>
     </div>
 
     <script type="module" src="main.js"></script>

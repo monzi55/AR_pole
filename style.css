@@ -42,6 +42,13 @@ body {
     opacity: 1;
 }
 
+#top-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 header {
     text-align: center;
     padding-top: 20px;
@@ -132,10 +139,16 @@ header p {
 
 #ar-start-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     z-index: 20;
+    background: rgba(0,0,0,0.5); /* Slight dim to start screen */
 }
 
 #start-ar-btn {
@@ -165,16 +178,17 @@ header p {
 /* Version Badge styling */
 #version-badge {
     position: absolute;
-    bottom: 10px;
-    right: 15px;
-    font-size: 10px;
-    opacity: 0.6;
+    bottom: 20px;
+    right: 20px;
+    font-size: 11px;
+    opacity: 0.8;
     color: white;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 2px 8px;
-    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 12px;
+    border-radius: 20px;
     pointer-events: none;
     letter-spacing: 0.5px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Three.js Canvas default styling */
