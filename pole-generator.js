@@ -25,7 +25,7 @@ export function createConstructionPole() {
     });
 
     // Add a sharp metal tip at the bottom
-    const tipHeight = 0.15; // 15cm sharp tip
+    const tipHeight = 0.075; // 7.5cm sharp tip (half of previous 15cm)
     const tipGeo = new THREE.ConeGeometry(radius, tipHeight, 16);
     const tipMat = new THREE.MeshStandardMaterial({ 
         color: 0x555555, 
