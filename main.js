@@ -195,6 +195,7 @@ function render(timestamp, frame) {
     }
 
     renderer.render(scene, camera);
+}
 
 function takeScreenshot() {
     screenshotRequested = true;
