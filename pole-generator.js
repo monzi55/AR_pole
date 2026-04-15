@@ -7,9 +7,9 @@ import * as THREE from 'three';
 export function createConstructionPole() {
     const poleGroup = new THREE.Group();
     
-    const totalHeight = 2.0; // 2 meters high
-    const radius = 0.025;   // 2.5cm radius
-    const segments = 10;    // 10 bands of color
+    const totalHeight = 1.2; // 1.2 meters high (6 segments of 20cm)
+    const radius = 0.0125;  // 1.25cm radius (half of previous 2.5cm)
+    const segments = 6;     // 6 bands of color (3 red, 3 white)
     const segmentHeight = totalHeight / segments;
 
     // Standard materials

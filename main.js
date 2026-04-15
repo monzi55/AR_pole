@@ -79,9 +79,18 @@ function init() {
         poles = [];
     });
 
+    // Prevent XR select event when clicking UI buttons
+    resetBtn.addEventListener('beforexrselect', (e) => {
+        e.preventDefault();
+    });
+
     captureBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         takeScreenshot();
+    });
+
+    captureBtn.addEventListener('beforexrselect', (e) => {
+        e.preventDefault();
     });
 
     window.addEventListener('resize', onWindowResize);
