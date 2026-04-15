@@ -13,6 +13,7 @@ const uiOverlay = document.getElementById('ui-overlay');
 const startBtnContainer = document.getElementById('ar-start-container');
 const startBtn = document.getElementById('start-ar-btn');
 const resetBtn = document.getElementById('reset-btn');
+const undoBtn = document.getElementById('undo-btn');
 const captureBtn = document.getElementById('capture-btn');
 const instructionText = document.getElementById('instruction-text');
 
@@ -77,10 +78,23 @@ function init() {
         e.stopPropagation();
         poles.forEach(p => scene.remove(p));
         poles = [];
+        instructionText.innerText = 'ポールをすべて消去しました';
     });
 
-    // Prevent XR select event when clicking UI buttons
     resetBtn.addEventListener('beforexrselect', (e) => {
+        e.preventDefault();
+    });
+
+    undoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (poles.length > 0) {
+            const lastPole = poles.pop();
+            scene.remove(lastPole);
+            instructionText.innerText = '最後の1本を取り消しました';
+        }
+    });
+
+    undoBtn.addEventListener('beforexrselect', (e) => {
         e.preventDefault();
     });
 

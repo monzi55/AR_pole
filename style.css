@@ -121,6 +121,16 @@ header p {
     letter-spacing: 0.5px;
 }
 
+.glass-btn.small {
+    min-width: 60px;
+    padding: 10px;
+    opacity: 0.7;
+}
+
+.glass-btn.small span {
+    font-size: 9px;
+}
+
 .glass-btn.primary {
     background: rgba(255, 255, 255, 0.25);
     width: 90px;
@@ -148,7 +158,7 @@ header p {
     justify-content: center;
     align-items: center;
     z-index: 20;
-    background: rgba(0,0,0,0.5); /* Slight dim to start screen */
+    background: #000; /* Solid black for better contrast on start screen */
 }
 
 #start-ar-btn {
@@ -177,18 +187,20 @@ header p {
 
 /* Version Badge styling */
 #version-badge {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 11px;
-    opacity: 0.8;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 4px 12px;
-    border-radius: 20px;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff; /* Explicit pure white */
+    background: rgba(255, 30, 0, 0.8); /* Noticeable vibrant red background */
+    padding: 6px 16px;
+    border-radius: 30px;
     pointer-events: none;
-    letter-spacing: 0.5px;
-    border: 1px solid rgba(255,255,255,0.1);
+    letter-spacing: 1px;
+    border: 2px solid rgba(255,255,255,0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    z-index: 9999;
 }
 
 /* Three.js Canvas default styling */
