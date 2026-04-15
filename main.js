@@ -21,8 +21,14 @@ const screenshotInstruction = document.getElementById('screenshot-instruction');
 const versionBadge = document.getElementById('version-badge');
 const instructionText = document.getElementById('instruction-text');
 
-init();
-animate();
+versionBadge.innerText = 'Ver 1.8';
+
+try {
+    init();
+    animate();
+} catch (err) {
+    console.error('Initialization failed:', err);
+}
 
 function init() {
     container = document.createElement('div');
@@ -54,9 +60,18 @@ function init() {
         domOverlay: { root: uiOverlay }
     });
     
+    // Some browsers require the button to be in the DOM to trigger click events
+    arButton.style.display = 'none';
+    container.appendChild(arButton);
+    
     // Replace standard button with our custom styled one
     startBtn.addEventListener('click', () => {
-        arButton.click();
+        try {
+            arButton.click();
+        } catch (err) {
+            console.error('AR Click failed:', err);
+            alert('ARの起動に失敗しました。');
+        }
     });
 
     renderer.xr.addEventListener('sessionstart', () => {
