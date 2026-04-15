@@ -42,14 +42,19 @@
                 <span>1本戻る</span>
             </button>
             
-            <button id="capture-btn" class="glass-btn primary" title="撮影">
-                <div class="shutter-icon"></div>
-                <span>撮影</span>
+            <button id="screenshot-helper-btn" class="glass-btn primary" title="スクリーンショット">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:32px; height:32px; color: white;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                <span>全画面</span>
             </button>
         </div>
     </div>
 
-    <div id="version-badge">Ver 1.5</div>
+    <div id="screenshot-instruction" class="hidden">
+        <p>本体のボタンを使って<br>スクリーンショットを撮ってください</p>
+        <button id="ui-show-btn">元に戻す</button>
+    </div>
+
+    <div id="version-badge">Ver 1.6</div>
 
     <!-- AR Start Button (managed by Three.js ARButton, but we can customize or use our own) -->
     <div id="ar-start-container">

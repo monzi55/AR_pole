@@ -15,7 +15,10 @@ const startBtnContainer = document.getElementById('ar-start-container');
 const startBtn = document.getElementById('start-ar-btn');
 const resetBtn = document.getElementById('reset-btn');
 const undoBtn = document.getElementById('undo-btn');
-const captureBtn = document.getElementById('capture-btn');
+const screenshotBtn = document.getElementById('screenshot-helper-btn');
+const uiShowBtn = document.getElementById('ui-show-btn');
+const screenshotInstruction = document.getElementById('screenshot-instruction');
+const versionBadge = document.getElementById('version-badge');
 const instructionText = document.getElementById('instruction-text');
 
 init();
@@ -99,16 +102,35 @@ function init() {
         e.preventDefault();
     });
 
-    captureBtn.addEventListener('click', (e) => {
+    screenshotBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        takeScreenshot();
+        toggleUI(false);
     });
 
-    captureBtn.addEventListener('beforexrselect', (e) => {
+    screenshotBtn.addEventListener('beforexrselect', (e) => {
+        e.preventDefault();
+    });
+
+    uiShowBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleUI(true);
+    });
+
+    uiShowBtn.addEventListener('beforexrselect', (e) => {
         e.preventDefault();
     });
 
     window.addEventListener('resize', onWindowResize);
+}
+
+function toggleUI(visible) {
+    if (visible) {
+        uiOverlay.classList.add('active');
+        screenshotInstruction.classList.add('hidden');
+    } else {
+        uiOverlay.classList.remove('active');
+        screenshotInstruction.classList.remove('hidden');
+    }
 }
 
 function onSelect() {
@@ -173,30 +195,6 @@ function render(timestamp, frame) {
     }
 
     renderer.render(scene, camera);
-
-    if (screenshotRequested) {
-        captureFrame();
-        screenshotRequested = false;
-    }
-}
-
-function captureFrame() {
-    try {
-        const dataURL = renderer.domElement.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.download = `ar-pole-photo-${Date.now()}.png`;
-        link.href = dataURL;
-        link.click();
-        
-        instructionText.innerText = '写真を保存しました';
-        setTimeout(() => {
-            instructionText.innerText = 'タップしてさらに配置';
-        }, 2000);
-    } catch (err) {
-        console.error('Screenshot failed:', err);
-        alert('撮影に失敗しました');
-    }
-}
 
 function takeScreenshot() {
     screenshotRequested = true;
