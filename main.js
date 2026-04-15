@@ -22,7 +22,7 @@ const screenshotInstruction = document.getElementById('screenshot-instruction');
 const versionBadge = document.getElementById('version-badge');
 const instructionText = document.getElementById('instruction-text');
 
-versionBadge.innerText = 'Ver 1.9';
+versionBadge.innerText = 'Ver 2.0';
 
 try {
     init();
@@ -137,6 +137,18 @@ function init() {
     });
 
     window.addEventListener('resize', onWindowResize);
+
+    // Reliable toggle for clean view
+    window.addEventListener('click', () => {
+        if (isCleanView) {
+            const isHidden = screenshotInstruction.classList.contains('hidden');
+            if (isHidden) {
+                screenshotInstruction.classList.remove('hidden');
+            } else {
+                screenshotInstruction.classList.add('hidden');
+            }
+        }
+    });
 }
 
 function toggleUI(visible) {
