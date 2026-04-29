@@ -234,7 +234,7 @@ function render(timestamp, frame) {
         if (hitTestSource) {
             const hitTestResults = frame.getHitTestResults(hitTestSource);
 
-            if (hitTestResults.length) {
+            if (hitTestResults.length && !isCleanView) {
                 const hit = hitTestResults[0];
                 reticle.visible = true;
                 reticle.matrix.fromArray(hit.getPose(referenceSpace).transform.matrix);
