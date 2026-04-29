@@ -17,6 +17,8 @@ const startBtn = document.getElementById('start-ar-btn');
 const resetBtn = document.getElementById('reset-btn');
 const undoBtn = document.getElementById('undo-btn');
 const screenshotBtn = document.getElementById('screenshot-helper-btn');
+const screenshot34Btn = document.getElementById('screenshot-3-4-btn');
+const maskWindow = document.getElementById('mask-window');
 const uiShowBtn = document.getElementById('ui-show-btn');
 const screenshotInstruction = document.getElementById('screenshot-instruction');
 const versionBadge = document.getElementById('version-badge');
@@ -122,16 +124,25 @@ function init() {
 
     screenshotBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        toggleUI(false);
+        toggleUI(false, false);
     });
 
     screenshotBtn.addEventListener('beforexrselect', (e) => {
         e.preventDefault();
     });
 
+    screenshot34Btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleUI(false, true);
+    });
+
+    screenshot34Btn.addEventListener('beforexrselect', (e) => {
+        e.preventDefault();
+    });
+
     uiShowBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        toggleUI(true);
+        toggleUI(true, false);
     });
 
     uiShowBtn.addEventListener('beforexrselect', (e) => {
@@ -141,7 +152,7 @@ function init() {
     window.addEventListener('resize', onWindowResize);
 }
 
-function toggleUI(visible) {
+function toggleUI(visible, is34 = false) {
     const topUI = document.getElementById('top-ui');
     const controls = document.getElementById('controls');
     
@@ -150,12 +161,18 @@ function toggleUI(visible) {
         topUI.style.display = 'flex';
         controls.style.display = 'flex';
         screenshotInstruction.classList.add('hidden');
+        if (maskWindow) maskWindow.classList.remove('active');
     } else {
         isCleanView = true;
         topUI.style.display = 'none';
         controls.style.display = 'none';
         // Start with screenshot instruction hidden for a truly clean view
         screenshotInstruction.classList.add('hidden');
+        if (is34 && maskWindow) {
+            maskWindow.classList.add('active');
+        } else if (maskWindow) {
+            maskWindow.classList.remove('active');
+        }
     }
 }
 

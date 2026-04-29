@@ -137,10 +137,29 @@ header p {
 
 .glass-btn.primary {
     background: rgba(255, 255, 255, 0.25);
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+#mask-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: calc(100vw * 4 / 3);
+    max-height: 100vh;
+    max-width: calc(100vh * 3 / 4);
+    box-shadow: 0 0 0 9999px #000;
+    pointer-events: none;
+    z-index: 5;
+    display: none;
+}
+
+#mask-window.active {
+    display: block;
 }
 
 .shutter-icon {
